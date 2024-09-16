@@ -1,0 +1,67 @@
+﻿@page
+@model IndexModel
+@{
+	ViewData["Title"] = "Home page";
+}
+
+<h1 class="text-center my-4">Products</h1>
+
+<div class="container">
+	<div class="row">
+		@foreach (var product in Model.Products)
+		{
+			<div class="col-md-4 mb-4">
+				<div class="card shadow-sm h-100">
+					<img class="card-img-top" alt="picture" src="@product.Url" style="height: 200px; object-fit: cover;" />
+					<div class="card-body">
+						<h5>@product.Name</h5>
+						<p>@product.Description</p>
+						<p class="text-danger font-weight-bold">@product.Price</p>
+
+						<!-- форма перенаправлення на сторінку замовлення з параметрами -->
+						<form method="get" asp-page="/Order" asp-route-name="@product.Name" asp-route-description="@product.Description" asp-route-price="@product.Price" asp-route-key="@product.RowKey">
+							<input type="submit" value="Order" class="btn btn-success" />
+						</form>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>Products</h1>
+
+@foreach (var product in Model.Products)
+{
+    <div>
+        <img alt="picture" src="@product.Url" width="200" height="150" />
+        <h3>@product.Name</h3>
+        <p>@product.Description</p>
+        <p style="color:crimson;">@product.Price</p>
+    </div>
+    <form method="post">
+        <input name="key" value="@product.RowKey" type="hidden"/>
+        <input type="submit" value="Order" class="btn btn-success"/>
+    </form>
+    <br/>
+    <br/>
+} *@
+
+
+
+
+
