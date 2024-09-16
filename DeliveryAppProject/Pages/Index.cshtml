@@ -4,13 +4,72 @@
     ViewData["Title"] = "Home page";
 }
 
-@foreach(var product in Model.Products){
-    <div>
-        <img alt="picture" src="@product.Url" height="150"/>
-        <h3>@product.Name</h3>
-        <p>@product.Description</p>
-        <p style="color:crimson;">@product.Price</p>
-    </div>
-    <br/>
-    <br/>
-}
+<style>
+	body  {
+		background-color: #F0E68C;
+
+	}
+
+	.card {
+		background-color: #BDB76B;
+		color: black;
+	}
+
+	.card h5, .card p {
+		color: black;
+	}
+
+	.card img {
+		border-bottom: 1px solid white;
+	}
+</style>
+
+<h1 class="text-center my-4">Products</h1>
+
+<div class="container">
+	<div class="row">
+		@foreach (var product in Model.Products)
+		{
+			<div class="col-md-4 mb-4">
+				<div class="card shadow-sm h-100">
+					<img class="card-img-top" alt="picture" src="@product.Url" style="height: 200px; object-fit: cover;" />
+					<div class="card-body">
+						<label for="name-@product.RowKey">Name:</label>
+						<h5 id="name-@product.RowKey" class="card-title">@product.Name</h5>
+
+						<label for="description-@product.RowKey">Description:</label>
+						<p id="description-@product.RowKey" class="card-text">@product.Description</p>
+
+						<label for="price-@product.RowKey">Price:</label>
+						<h5 id="price-@product.RowKey" class="text-danger font-weight-bold">@product.Price</h5>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+
+
+
+
+
+@* <div class="container">
+	<div class="row">
+		@foreach (var product in Model.Products)
+		{
+			<div class="col-md-4 mb-4">
+				<div class="card shadow-sm h-100">
+					<img class="card-img-top" alt="picture" src="@product.Url" style="height: 250px; object-fit: cover;" />
+					<div class="card-body">
+						<h5>@product.Name</h5>
+						<p>@product.Description</p>
+						<p class="text-danger font-weight-bold">@product.Price</p>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+ *@

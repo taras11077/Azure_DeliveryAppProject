@@ -4,7 +4,26 @@
 	ViewData["Title"] = "Home page";
 }
 
-<h1 class="text-center my-4">Products</h1>
+<style>
+	body {
+		background-color: #B0C4DE; 
+	}
+
+	.card {
+		background-color: #4682B4;
+		color: white;
+	}
+
+	.card h5, .card p {
+		color: white;
+	}
+
+	.card img {
+		border-bottom: 1px solid white;
+	}
+</style>
+
+<h1 class="text-center my-4">Product list</h1>
 
 <div class="container">
 	<div class="row">
@@ -14,13 +33,20 @@
 				<div class="card shadow-sm h-100">
 					<img class="card-img-top" alt="picture" src="@product.Url" style="height: 200px; object-fit: cover;" />
 					<div class="card-body">
-						<h5>@product.Name</h5>
-						<p>@product.Description</p>
-						<p class="text-danger font-weight-bold">@product.Price</p>
+						<label for="name-@product.RowKey" style="text-decoration: underline;">Name:</label>
+						<h5 id="name-@product.RowKey" class="card-title">@product.Name</h5>
 
+						<label for="description-@product.RowKey" style="text-decoration: underline;">Description:</label>
+						<p id="description-@product.RowKey" class="card-text">@product.Description</p>
+
+						<label for="price-@product.RowKey" style="text-decoration: underline;">Price:</label>
+						<h3 id="price-@product.RowKey" class="text-danger font-weight-bold">@product.Price</h3>
+					
 						<!-- форма перенаправлення на сторінку замовлення з параметрами -->
 						<form method="get" asp-page="/Order" asp-route-name="@product.Name" asp-route-description="@product.Description" asp-route-price="@product.Price" asp-route-key="@product.RowKey">
-							<input type="submit" value="Order" class="btn btn-success" />
+							<div class="text-center">
+								<input type="submit" value="Order" class="btn btn-success" />
+							</div>
 						</form>
 					</div>
 				</div>

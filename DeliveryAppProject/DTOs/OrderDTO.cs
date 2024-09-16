@@ -1,4 +1,4 @@
-﻿namespace DeliveryAppProject
+﻿namespace DeliveryAppProject.DTOs
 {
     public class OrderDTO
     {

@@ -6,13 +6,27 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddTransient<INavigationService>(_ =>
+builder.Services.AddTransient<INavigationService>(sp =>
 {
-    return new ServiceBusQueue(builder.Configuration.GetConnectionString("ServiceBus")!);
+	var connectionString = builder.Configuration.GetConnectionString("ServiceBus")!;
+	var logger = sp.GetRequiredService<ILogger<ServiceBusQueue>>();
+	return new ServiceBusQueue(connectionString, logger);
 });
-builder.Services.AddTransient<IProductService>(_ =>
+
+
+builder.Services.AddSingleton<BlobService>(sp =>
 {
-    return new ProductService(builder.Configuration.GetConnectionString("Storage")!);
+	var connectionString = builder.Configuration.GetConnectionString("Storage")!;
+	var logger = sp.GetRequiredService<ILogger<BlobService>>();
+	return new BlobService(connectionString, logger);
+});
+
+builder.Services.AddTransient<IProductService>(sp =>
+{
+	var connectionString = builder.Configuration.GetConnectionString("Storage")!;
+	var logger = sp.GetRequiredService<ILogger<ProductService>>();
+	var blobService = sp.GetRequiredService<BlobService>();
+	return new ProductService(connectionString, logger, blobService);
 });
 
 var app = builder.Build();

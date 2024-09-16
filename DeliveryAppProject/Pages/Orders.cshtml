@@ -3,11 +3,55 @@
 @{
 }
 
-@foreach(var order in Model.Orders){
+<style>
+	body  {
+		background-color: #FFA07A;
+
+	}
+
+	.card {
+		background-color: #FF7F50;
+		color: white;
+	}
+
+	.card h5, .card p {
+		color: white;
+	}
+
+	.card img {
+		border-bottom: 1px solid white;
+	}
+</style>
+
+<h1 class="text-center my-4">Order list</h1>
+
+<div class="container">
+	<div class="row">
+		@foreach (var order in Model.Orders)
+		{
+			<div class="col-md-4 mb-4">
+				<div class="card shadow-sm h-100">
+					<img class="card-img-top" alt="picture" src="@order.Image" style="height: 300px; object-fit: cover;" />
+					<div class="card-body">
+						<h3>@order.Name</h3>
+						<h4>@order.Email</h4>
+						<h3 class="text-danger">@order.Price</h3>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+
+
+
+@* @foreach(var order in Model.Orders){
     <div>
         <img alt="picture" src="@order.Image" height="150" />
         <h3>@order.Name</h3>
         <p>@order.Email</p>
         <p style="color:crimson;">@order.Price</p>
     </div>
-}
+} *@
