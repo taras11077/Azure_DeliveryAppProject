@@ -25,7 +25,7 @@ builder.Services.AddTransient<IProductService>(sp =>
 	return new ProductService(connectionString, logger, blobService);
 });
 
-// Add services to the container.
+
 builder.Services.AddRazorPages();
 
 builder.Services.AddSession(opt =>

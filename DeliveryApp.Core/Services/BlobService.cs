@@ -21,6 +21,8 @@ public class BlobService
         _logger = logger;
 	}
 
+
+	// перший варіант через SAS-посилання, другий - через публічний доступ до блобів на читання  
     //public async Task<(string name, string sas)> AddBlob(string blobName, IEnumerable<byte> data)
     public async Task<string> AddBlob(string blobName, IEnumerable<byte> data)
 	{
@@ -37,6 +39,7 @@ public class BlobService
 			//var sas = GenerateSAS(blob);
 			await blobClient.UploadAsync(ms);
 			//return (uniqueName, sas);
+
 			return GetBlobUrl(uniqueBlobName);  // повертаємо постійну URL
 		}
 		catch (Exception ex)
